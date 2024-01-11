@@ -27,25 +27,35 @@ class LanguageGame
     public function run(): void
     {
         session_start();
+
         if (isset($_SESSION['player'])) $this->player = $_SESSION['player'];
-        else $this->player = new Player("Ikke");
+        else {
+            $this->player = new Player("Ikke");
+            $_SESSION['player'] = $this->player;
+        }
 
         echo $this->player->getName();
-        echo "<br>";
-        echo $this->player->getScore();
 
         // TODO: check for option A or B
         if (empty($_POST)) {
             $this->generateRandomWord();
             echo "<h1>Translate <i>this</i>!!!</h1>";
             echo "<h2>" . $this->word->getWord() . "</h2>";
-        } else {
+        } else if (!isset($_POST["reset"])) {
             $word = $_SESSION['currentWord'];
             $answer = $_POST["translationBar"];
 
             if($word->verify($answer)) {
                 echo "<h1>Correct!</h1>";
-            } else echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";
+                $this->player->incrementScore();
+            } else {
+                echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";
+                $this->player->incrementWrongScore();
+            }
+        } else {
+            $this->player->resetScore();
+            echo "<h1>Score has been reset!</h1>";
         }
+
     }
 }

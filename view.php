@@ -18,6 +18,7 @@
             <?php else: ?>
                 <button type="submit">New Word!</submit>
             <?php endif;?>
+            <button name="reset" type="submit">Reset</submit>
         </form>
     </main>
 </body>

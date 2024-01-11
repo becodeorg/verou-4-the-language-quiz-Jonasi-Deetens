@@ -39,6 +39,7 @@ class LanguageGame
         // TODO: check for option A or B
         if (empty($_POST)) {
             $this->generateRandomWord();
+            $this->printScore();
             echo "<h1>Translate <i>this</i>!!!</h1>";
             echo "<h2>" . $this->word->getWord() . "</h2>";
         } else if (!isset($_POST["reset"])) {
@@ -46,17 +47,37 @@ class LanguageGame
             $answer = $_POST["translationBar"];
 
             if($word->verify($answer)) {
-                echo "<h1>Correct!</h1>";
                 $this->player->incrementScore();
+                $this->printScore();
+                if ($this->player->getRightAnswers() === 10)
+                {
+                    echo "<h1>Congratulations, you won!</h1>";
+
+                } else {
+                    echo "<h1>Correct!</h1>";
+                }
             } else {
-                echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";
                 $this->player->incrementWrongScore();
+                $this->printScore();
+                if ($this->player->getWrongAnswers() === 10)
+                {
+                    echo "<h1>Failure as always, atleast you didn't get a 0.. Did you?</h1>";
+
+                } else {
+                    echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";
+                }
             }
         } else {
             $this->player->resetScore();
             echo "<h1>Score has been reset!</h1>";
         }
+    }
+
+    public function printScore()
+    {
+        echo "<br>";
         echo "Right answers: " . $this->player->getRightAnswers();
+        echo "<br>";
         echo "Wrong answers: " . $this->player->getWrongAnswers();
     }
 }

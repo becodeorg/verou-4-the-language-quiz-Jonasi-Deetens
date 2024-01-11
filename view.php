@@ -16,7 +16,7 @@
                 <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
                 <button type="submit">Submit!</submit>
             <?php else: ?>
-                <button type="submit">New Word!</submit>
+                <button type="submit">New word!</submit>
             <?php endif;?>
             <button name="reset" type="submit">Reset</submit>
         </form>

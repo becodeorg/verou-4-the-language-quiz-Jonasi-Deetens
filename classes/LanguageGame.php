@@ -56,6 +56,7 @@ class LanguageGame
             $this->player->resetScore();
             echo "<h1>Score has been reset!</h1>";
         }
-
+        echo "Right answers: " . $this->player->getRightAnswers();
+        echo "Wrong answers: " . $this->player->getWrongAnswers();
     }
 }

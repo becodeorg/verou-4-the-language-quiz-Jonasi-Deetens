@@ -15,7 +15,7 @@
                 <label for="translationBar">Translation?</label>
                 <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
                 <button type="submit">Submit!</submit>
-            <?php else: ?>
+            <?php elseif (!isset($_POST["gameover"])): ?>
                 <button type="submit">New word!</submit>
             <?php endif;?>
             <button name="reset" type="submit">Reset</submit>

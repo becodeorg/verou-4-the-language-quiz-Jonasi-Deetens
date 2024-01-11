@@ -52,6 +52,7 @@ class LanguageGame
                 if ($this->player->getRightAnswers() === 10)
                 {
                     echo "<h1>Congratulations, you won!</h1>";
+                    $_POST["gameover"] = true;
 
                 } else {
                     echo "<h1>Correct!</h1>";
@@ -62,6 +63,7 @@ class LanguageGame
                 if ($this->player->getWrongAnswers() === 10)
                 {
                     echo "<h1>Failure as always, atleast you didn't get a 0.. Did you?</h1>";
+                    $_POST["gameover"] = true;
 
                 } else {
                     echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";

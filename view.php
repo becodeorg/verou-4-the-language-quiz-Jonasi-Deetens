@@ -11,9 +11,13 @@
 	<!-- TODO: add a form for the user to play the game -->
     <main>
         <form method="POST">
-            <label for="translationBar">Translation?</label>
-            <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
-            <button type="submit">Submit!</submit>
+            <?php if (empty($_POST)): ?>
+                <label for="translationBar">Translation?</label>
+                <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
+                <button type="submit">Submit!</submit>
+            <?php else: ?>
+                <button type="submit">New Word!</submit>
+            <?php endif;?>
         </form>
     </main>
 </body>

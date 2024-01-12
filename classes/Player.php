@@ -10,7 +10,8 @@ class Player
     public function __construct(string $name)
     {
         // TODO: add 👤 automatically to their name
-        $this->name = "👤 " . $name;
+        if ($name !== "") $this->name = "👤 " . $name;
+        else $this->name = "👤 Jaqen";
         $this->rightAnswers = 0;
         $this->wrongAnswers = 0;
     }

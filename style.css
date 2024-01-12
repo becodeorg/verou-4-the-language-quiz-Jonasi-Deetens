@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+main {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#container {
+    position: relative;
+}
+
+.rain {
+    position: absolute;
+    margin: 2px;
+    left: 0px;
+    top: -20px;
+    text-orientation: upright;
+    writing-mode: vertical-lr;
+    animation: fall 5s linear;
+}
+
+.horizontal {
+    animation: none;
+    writing-mode: horizontal-tb;
+}
+
+@keyframes fall {
+    to {
+      top: 100vh;
+    }
+}

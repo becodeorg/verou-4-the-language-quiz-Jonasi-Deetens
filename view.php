@@ -6,16 +6,18 @@
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="rain.js" defer></script>
 </head>
-<body>
+<body id="container">
 	<!-- TODO: add a form for the user to play the game -->
-    <main>
+    <main id="main">
         <form method="POST">
             <?php if (isset($player)): ?>
 
                 <h1>Translate <i>this</i>!!!</h1>
-                <h2><?= $player->getName(); ?></h2>
-                <h2><?= $word->getWord(); ?></h2>
+                <h2>Player: <?= $player->getName(); ?></h2>
+                <h2>Word: <?= $word->getWord(); ?></h2>
                 <p>Right answers: <?= $player->getRightAnswers(); ?></p>
                 <p>Wrong answers: <?= $player->getWrongAnswers(); ?></p>
 

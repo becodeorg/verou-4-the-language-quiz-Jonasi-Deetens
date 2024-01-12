@@ -122,17 +122,17 @@ const letItRain = () => {
 
     rainDrops.push(rain);
     main.appendChild(rain);
-    checkBottom();
 }
 
 const checkBottom = () => {
     rainDrops.forEach(rain => {
         const rect = rain.getBoundingClientRect();
-        if (rect.bottom >= window.innerHeight-30) {
-            rain.style.top = window.innerHeight - rect.height + "px";
+        if ((rect.bottom - rect.height / 2)>= window.innerHeight) {
+            rain.style.top = window.innerHeight - rect.width + "px";
             rain.classList.add("horizontal");
         }
     });
 };
 
 setInterval(letItRain, 500);
+setInterval(checkBottom, 100);

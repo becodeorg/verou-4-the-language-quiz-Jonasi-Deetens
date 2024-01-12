@@ -29,57 +29,44 @@ class LanguageGame
         session_start();
 
         if (isset($_SESSION['player'])) $this->player = $_SESSION['player'];
-        else {
-            $this->player = new Player("Ikke");
+        else if (isset($_POST["nickname"])) {
+            $this->player = new Player($_POST["nickname"]);
             $_SESSION['player'] = $this->player;
         }
 
-        echo $this->player->getName();
-
         // TODO: check for option A or B
-        if (empty($_POST)) {
+        if (empty($_POST) || isset($_POST["nickname"])) {
             $this->generateRandomWord();
-            $this->printScore();
-            echo "<h1>Translate <i>this</i>!!!</h1>";
-            echo "<h2>" . $this->word->getWord() . "</h2>";
-        } else if (!isset($_POST["reset"])) {
+        } else if (isset($_POST["reset"])) {
+            $this->player->resetScore();
+            $_SESSION["message"] = "Score has been reset!";
+        } else if (isset($_POST["new"])) {
+            unset($_SESSION["player"]);
+        } else {
             $word = $_SESSION['currentWord'];
             $answer = $_POST["translationBar"];
 
             if($word->verify($answer)) {
                 $this->player->incrementScore();
-                $this->printScore();
                 if ($this->player->getRightAnswers() === 10)
                 {
-                    echo "<h1>Congratulations, you won!</h1>";
+                    $_SESSION["message"] = "Congratulations, you won!";
                     $_POST["gameover"] = true;
 
                 } else {
-                    echo "<h1>Correct!</h1>";
+                    $_SESSION["message"] =  "Correct";
                 }
             } else {
                 $this->player->incrementWrongScore();
-                $this->printScore();
                 if ($this->player->getWrongAnswers() === 10)
                 {
-                    echo "<h1>Failure as always, atleast you didn't get a 0.. Did you?</h1>";
+                    $_SESSION["message"] =  "Failure as always, atleast you didn't get a 0.. Did you?";
                     $_POST["gameover"] = true;
 
                 } else {
-                    echo "<h1>Failed, The correct answer was: " . $word->getTranslation() . "</h1>";
+                    $_SESSION["message"] =  "Failed, The correct answer was: " . $word->getTranslation();
                 }
             }
-        } else {
-            $this->player->resetScore();
-            echo "<h1>Score has been reset!</h1>";
         }
-    }
-
-    public function printScore()
-    {
-        echo "<br>";
-        echo "Right answers: " . $this->player->getRightAnswers();
-        echo "<br>";
-        echo "Wrong answers: " . $this->player->getWrongAnswers();
     }
 }

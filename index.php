@@ -20,4 +20,9 @@ require_once 'classes/Word.php';
 $game = new LanguageGame();
 $game->run();
 
+// Check for session variables
+$player; $word;
+if (isset($_SESSION['player'])) $player = $_SESSION['player'];
+if (isset($_SESSION['currentWord'])) $word = $_SESSION['currentWord'];
+
 require 'view.php';

@@ -11,14 +11,28 @@
 	<!-- TODO: add a form for the user to play the game -->
     <main>
         <form method="POST">
-            <?php if (empty($_POST)): ?>
-                <label for="translationBar">Translation?</label>
-                <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
+            <?php if (isset($player)): ?>
+                <h1>Translate <i>this</i>!!!</h1>
+                <h2><?= $player->getName(); ?></h2>
+                <h2><?= $word->getWord(); ?></h2>
+                <p>Right answers: <?= $player->getRightAnswers(); ?></p>
+                <p>Wrong answers: <?= $player->getWrongAnswers(); ?></p>
+                <?php if (empty($_POST) || isset($_POST["nickname"])): ?>
+                    <label for="translationBar">Translation?</label>
+                    <input type="text" id="translationBar" name="translationBar" placeholder="Enter word here...">
+                    <button type="submit">Submit!</submit>
+                <?php elseif (!isset($_POST["gameover"])): ?>
+                    <p><?= $_SESSION["message"] ?></p>
+                    <button type="submit">New word!</submit>
+                <?php endif;?>
+                <button name="reset" type="submit">Reset</submit>
+                <button name="new" type="submit">New Game</submit>
+            <?php else: ?>
+                <h2>Please choose a nickname!</h2>
+                <label for="nickname">Nickname:</label>
+                <input type="text" id="nickname" name="nickname" placeholder="Enter a nickname here...">
                 <button type="submit">Submit!</submit>
-            <?php elseif (!isset($_POST["gameover"])): ?>
-                <button type="submit">New word!</submit>
-            <?php endif;?>
-            <button name="reset" type="submit">Reset</submit>
+            <?php endif; ?>
         </form>
     </main>
 </body>

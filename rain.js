@@ -122,7 +122,6 @@ const fly = (originalXPos, originalYPos) => {
         if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
         letterElement.style.top = yPos + "px";
     });
-    console.log(explodedLetters.length);
 }
 
 const explodeText = (element) => {
@@ -158,7 +157,7 @@ const checkBottom = () => {
         }
     });
 
-    if (explodedLetters.length >= 250) {
+    if (explodedLetters.length >= 100) {
         let lettersToDelete = explodedLetters.splice(0, explodedLetters.length/2);
         lettersToDelete.forEach(letter => {
             main.removeChild(letter);

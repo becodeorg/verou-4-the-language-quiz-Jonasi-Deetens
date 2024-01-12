@@ -119,7 +119,7 @@ const fly = (originalXPos, originalYPos) => {
         let yPos = parseInt(originalYPos) + getRandomInt(-50, 50);
         letterElement.style.transition = 'left 2s, top 2s';
         letterElement.style.left = xPos + "px";
-        if (yPos >= window.innerHeight) yPos = parseInt(originalYPos) + getRandomInt(-50, 0);
+        if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
         letterElement.style.top = yPos + "px";
     });
     console.log(explodedLetters.length);

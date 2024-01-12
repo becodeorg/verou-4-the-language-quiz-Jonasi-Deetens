@@ -36,6 +36,7 @@ class LanguageGame
 
         // TODO: check for option A or B
         if (empty($_POST) || isset($_POST["nickname"])) {
+            $_SESSION["message"] = "";
             $this->generateRandomWord();
         } else if (isset($_POST["reset"])) {
             $this->player->resetScore();

@@ -24,9 +24,13 @@ class Word
 
     public function verify(string $answer): bool
     {
-        // TODO: use this function to verify if the provided answer by the user matches the correct one
-        if (strtolower($this->translation) === strtolower($answer)) return true;
-        else return false;
-        // Bonus (hard): can you allow answers with small typo's (max one character different)?
+        $distance = levenshtein(strtolower($this->translation), strtolower($answer));
+        $threshold = 1;
+
+        if ($distance <= $threshold) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

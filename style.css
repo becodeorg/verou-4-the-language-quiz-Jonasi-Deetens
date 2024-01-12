@@ -30,6 +30,10 @@ main {
     animation: fall 5s linear;
 }
 
+.letter {
+    position: absolute;
+}
+
 .horizontal {
     animation: none;
     writing-mode: horizontal-tb;

@@ -119,9 +119,10 @@ const fly = (originalXPos, originalYPos) => {
         let yPos = parseInt(originalYPos) + getRandomInt(-50, 50);
         letterElement.style.transition = 'left 2s, top 2s';
         letterElement.style.left = xPos + "px";
-        while (yPos >= window.innerHeight) yPos = parseInt(originalYPos) + getRandomInt(-50, 50);
+        if (yPos >= window.innerHeight) yPos = parseInt(originalYPos) + getRandomInt(-50, 0);
         letterElement.style.top = yPos + "px";
     });
+    console.log(explodedLetters.length);
 }
 
 const explodeText = (element) => {
@@ -150,14 +151,14 @@ const explodeText = (element) => {
 const checkBottom = () => {
     rainDrops.forEach(rain => {
         const rect = rain.getBoundingClientRect();
-        if ((rect.bottom - rect.height / 20000)>= window.innerHeight) {
+        if ((rect.bottom - rect.height / 20000) >= window.innerHeight) {
             //rain.style.top = window.innerHeight - rect.width + "px";
             //rain.classList.add("horizontal");
             explodeText(rain);
         }
     });
 
-    if (explodedLetters.length >= 500) {
+    if (explodedLetters.length >= 250) {
         let lettersToDelete = explodedLetters.splice(0, explodedLetters.length/2);
         lettersToDelete.forEach(letter => {
             main.removeChild(letter);
@@ -182,4 +183,4 @@ function getRandomInt(min, max) {
 }
 
 setInterval(checkBottom, 1);
-setInterval(letItRain, 500);
+setInterval(letItRain, 700);

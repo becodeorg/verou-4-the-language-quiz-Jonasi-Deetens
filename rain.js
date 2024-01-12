@@ -132,6 +132,13 @@ const checkBottom = () => {
             rain.classList.add("horizontal");
         }
     });
+
+    if (rainDrops.length >= 500) {
+        let rainDropsToDelete = rainDrops.splice(0, rainDrops.length/2);
+        rainDropsToDelete.forEach(drop => {
+            main.removeChild(drop);
+        });
+    }
 };
 
 setInterval(letItRain, 500);

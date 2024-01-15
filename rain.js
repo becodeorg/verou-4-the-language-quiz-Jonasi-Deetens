@@ -1,107 +1,8 @@
+import words from "./words";
+
 const main = document.getElementById("main");
 let rainDrops = [];
 let explodedLetters = [];
-const words = [
-    'avontuur',
-    'vieren',
-    'beslissing',
-    'olifant',
-    'familie',
-    'prachtig',
-    'harmonie',
-    'identiteit',
-    'reis',
-    'kennis',
-    'taal',
-    'magnifiek',
-    'verhaal',
-    'operatie',
-    'aangenaam',
-    'hoeveelheid',
-    'betrouwbaar',
-    'symfonie',
-    'rustig',
-    'uniek',
-    'overwinning',
-    'schitterend',
-    'bamboe',
-    'vangen',
-    'heerlijk',
-    'enorm',
-    'fantastisch',
-    'gebaar',
-    'melodie',
-    'oneindig',
-    'gezellig',
-    'kilometer',
-    'lavendel',
-    'majestueus',
-    'nostalgie',
-    'gelegenheid',
-    'passie',
-    'citaat',
-    'stralend',
-    'spectrum',
-    'verleiden',
-    'eensgezind',
-    'onderneming',
-    'wijsheid',
-    'xenofobie',
-    'jeugdig',
-    'zeppelin',
-    'nauwkeurig',
-    'ademen',
-    'waterval',
-    'verblindend',
-    'excentriek',
-    'fluctueren',
-    'glorieus',
-    'hypnotiseren',
-    'verlichten',
-    'juxtaposeren',
-    'kaleidoscoop',
-    'doolhof',
-    'melancholie',
-    'nevel',
-    'oase',
-    'top',
-    'visionair',
-    'veerkrachtig',
-    'serenade',
-    'rust',
-    'paraplu',
-    'levendig',
-    'grillig',
-    'odyssee',
-    'verlangen',
-    'bries',
-    'zalig',
-    'kameleon',
-    'heerlijk',
-    'betoverend',
-    'frivool',
-    'glinsteren',
-    'harmonieus',
-    'iriserend',
-    'uitbundig',
-    'kinetisch',
-    'sappig',
-    'welluidend',
-    'vaag',
-    'weelderig',
-    'raadselachtig',
-    'ontmoeting',
-    'luxueus',
-    'bezorgdheid',
-    'schaamteloos',
-    'groen',
-    'aantrekkelijk',
-    'gastvrij',
-    'hoogtepunt',
-    'sfeer',
-    'wervelwind',
-    'levendig'
-  ];
 
 const randomColor = () => {
     const red = Math.floor(Math.random() * 256);
@@ -122,6 +23,7 @@ const fly = (originalXPos, originalYPos) => {
         if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
         letterElement.style.top = yPos + "px";
     });
+    changeTitleColors();
 }
 
 const explodeText = (element) => {
@@ -179,7 +81,20 @@ const letItRain = () => {
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
+
+const changeTitleColors = () => {
+    let titleElement = document.querySelector(".title");
+    console.log("hey");
+    titleElement.innerHTML = titleElement.textContent
+        .split("")
+        .map(letter => `<span class="individual-letter">${letter}</span>`)
+        .join("");
+
+    document.querySelectorAll('.individual-letter').forEach(letterElement => {
+        letterElement.style.color = randomColor();
+    });
+} 
 
 setInterval(checkBottom, 1);
 setInterval(letItRain, 700);

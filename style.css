@@ -39,6 +39,10 @@ main {
     writing-mode: horizontal-tb;
 }
 
+.title {
+    
+}
+
 @keyframes fall {
     to {
       top: 100vh;

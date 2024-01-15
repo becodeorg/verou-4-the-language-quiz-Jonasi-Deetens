@@ -15,7 +15,7 @@
         <form method="POST">
             <?php if (isset($player)): ?>
 
-                <h1>Translate <i>this</i>!!!</h1>
+                <h1 class="title">Translate <i>this</i>!!!</h1>
                 <h2>Player: <?= $player->getName(); ?></h2>
                 <h2>Word: <?= $word->getWord(); ?></h2>
                 <p>Right answers: <?= $player->getRightAnswers(); ?></p>

@@ -49,7 +49,7 @@ class LanguageGame
 
             if($word->verify($answer)) {
                 $this->player->incrementScore();
-                if ($this->player->getRightAnswers() === 10)
+                if ($this->player->getRightAnswers() >= 10)
                 {
                     $_SESSION["message"] = "Congratulations, you won!";
                     $_POST["gameover"] = true;
@@ -59,7 +59,7 @@ class LanguageGame
                 }
             } else {
                 $this->player->incrementWrongScore();
-                if ($this->player->getWrongAnswers() === 10)
+                if ($this->player->getWrongAnswers() >= 10)
                 {
                     $_SESSION["message"] =  "Failure as always, atleast you didn't get a 0.. Did you?";
                     $_POST["gameover"] = true;

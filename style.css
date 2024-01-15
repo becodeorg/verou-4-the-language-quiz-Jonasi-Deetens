@@ -38,7 +38,7 @@ main {
     color: red;
 }
 
-.letter {
+.letter, .word-letter {
     position: absolute;
 }
 

@@ -27,16 +27,34 @@ const changeTitleColors = () => {
             letterElement.style.color = randomColor();
         });
     }
-} 
+};
 
-const fly = (originalXPos, originalYPos) => {
+const flyToCursor = (event) => {
     document.querySelectorAll('.letter').forEach(letterElement => {
+        let originalXPos = event.clientX;
+        let originalYPos = event.clientY;
         let xPos = parseInt(originalXPos) + getRandomInt(-50, 50);
         let yPos = parseInt(originalYPos) + getRandomInt(-50, 50);
-        letterElement.style.transition = 'left 2s, top 2s';
+
+        letterElement.style.transition = 'left 0.2s, top 0.2s';
+        letterElement.style.left = xPos + "px";
+        //if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
+        letterElement.style.top = yPos + "px";
+    });
+};
+
+const fly = (originalXPos, originalYPos) => {
+    document.querySelectorAll('.word-letter').forEach(letterElement => {
+        let xPos = parseInt(originalXPos) + getRandomInt(-50, 50);
+        let yPos = parseInt(originalYPos) + getRandomInt(-50, 50);
+
+        letterElement.style.transition = 'left 1s, top 1s';
         letterElement.style.left = xPos + "px";
         if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
         letterElement.style.top = yPos + "px";
+
+        letterElement.classList.remove('word-letter');
+        letterElement.classList.add('letter');
     });
 }
 
@@ -54,7 +72,7 @@ const explodeText = (element) => {
         letterElement.style.left = xPos + "px";
         letterElement.style.top = yPos + "px";
         letterElement.style.color = randomColor();
-        letterElement.classList.add("letter");
+        letterElement.classList.add("word-letter");
 
         yPos += 17;
         explodedLetters.push(letterElement);
@@ -67,8 +85,6 @@ const checkBottom = () => {
     rainDrops.forEach(rain => {
         const rect = rain.getBoundingClientRect();
         if ((rect.bottom - rect.height / 20000) >= window.innerHeight) {
-            //rain.style.top = window.innerHeight - rect.width + "px";
-            //rain.classList.add("horizontal");
             explodeText(rain);
         }
     });
@@ -97,6 +113,8 @@ const letItRain = () => {
 const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+document.addEventListener("mousemove", flyToCursor);
 
 setInterval(checkBottom, 1);
 setInterval(letItRain, 1000);

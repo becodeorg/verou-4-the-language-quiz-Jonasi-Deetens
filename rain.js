@@ -1,4 +1,4 @@
-import words from "./words";
+import words from "./words.js";
 
 const main = document.getElementById("main");
 let rainDrops = [];
@@ -14,6 +14,21 @@ const randomColor = () => {
     return color;
 };
 
+const changeTitleColors = () => {
+    let titleElement = document.querySelector(".title");
+
+    if (titleElement) {
+        titleElement.innerHTML = titleElement.textContent
+            .split("")
+            .map(letter => `<span class="individual-letter">${letter}</span>`)
+            .join("");
+
+        document.querySelectorAll('.individual-letter').forEach(letterElement => {
+            letterElement.style.color = randomColor();
+        });
+    }
+} 
+
 const fly = (originalXPos, originalYPos) => {
     document.querySelectorAll('.letter').forEach(letterElement => {
         let xPos = parseInt(originalXPos) + getRandomInt(-50, 50);
@@ -23,7 +38,6 @@ const fly = (originalXPos, originalYPos) => {
         if (yPos + 20 >= window.innerHeight - 20) yPos = parseInt(originalYPos) + getRandomInt(-50, -20);
         letterElement.style.top = yPos + "px";
     });
-    changeTitleColors();
 }
 
 const explodeText = (element) => {
@@ -77,24 +91,12 @@ const letItRain = () => {
 
     rainDrops.push(rain);
     main.appendChild(rain);
+    changeTitleColors();
 };
 
-function getRandomInt(min, max) {
+const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const changeTitleColors = () => {
-    let titleElement = document.querySelector(".title");
-    console.log("hey");
-    titleElement.innerHTML = titleElement.textContent
-        .split("")
-        .map(letter => `<span class="individual-letter">${letter}</span>`)
-        .join("");
-
-    document.querySelectorAll('.individual-letter').forEach(letterElement => {
-        letterElement.style.color = randomColor();
-    });
-} 
-
 setInterval(checkBottom, 1);
-setInterval(letItRain, 700);
+setInterval(letItRain, 1000);

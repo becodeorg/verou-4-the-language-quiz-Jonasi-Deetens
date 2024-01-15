@@ -30,6 +30,14 @@ main {
     animation: fall 5s linear;
 }
 
+.right {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
+
 .letter {
     position: absolute;
 }
@@ -40,7 +48,7 @@ main {
 }
 
 .title {
-    
+
 }
 
 @keyframes fall {

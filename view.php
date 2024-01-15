@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Game</title>
     <link rel="stylesheet" href="style.css">
-    <script src="rain.js" defer></script>
+    <script src="rain.js" type="module" defer></script>
 </head>
 <body id="container">
 	<!-- TODO: add a form for the user to play the game -->
@@ -18,8 +18,8 @@
                 <h1 class="title">Translate <i>this</i>!!!</h1>
                 <h2>Player: <?= $player->getName(); ?></h2>
                 <h2>Word: <?= $word->getWord(); ?></h2>
-                <p>Right answers: <?= $player->getRightAnswers(); ?></p>
-                <p>Wrong answers: <?= $player->getWrongAnswers(); ?></p>
+                <p class="right">Right answers: <?= $player->getRightAnswers(); ?></p>
+                <p class="wrong">Wrong answers: <?= $player->getWrongAnswers(); ?></p>
 
                 <?php if (empty($_POST) || isset($_POST["nickname"])): ?>
 
